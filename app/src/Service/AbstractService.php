@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Entity\AbstractEntity;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
+use Exception;
 
 abstract class AbstractService
 {
@@ -43,5 +44,24 @@ abstract class AbstractService
     public function getEntityClass(): string
     {
         return $this->entityClass;
+    }
+
+    public function save(AbstractEntity $entity, ?int $id = null): AbstractEntity
+    {
+        $this->entityManager->beginTransaction();
+
+        try {
+            if(!$id) {
+                $this->entityManager->persist($entity);
+            }
+
+            $this->entityManager->flush();
+            $this->entityManager->commit();
+
+            return $entity;
+        } catch (Exception $e) {
+            $this->entityManager->rollback();
+            throw $e;
+        }
     }
 }
