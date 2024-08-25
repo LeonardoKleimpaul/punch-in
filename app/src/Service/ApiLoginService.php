@@ -20,9 +20,9 @@ class ApiLoginService extends AbstractService
             return ['error' => 'Email e senha são campos obrigatórios.'];
         }
 
-        // if() {
-        //     return ['error' => 'Email inválido.'];
-        // }
+        if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+            return ['error' => 'Email inválido.'];
+        }
 
         if(mb_strlen($data['password']) < 8) {
             return ['error' => 'A senha precisa ter pelo menos 8 caracteres.'];
