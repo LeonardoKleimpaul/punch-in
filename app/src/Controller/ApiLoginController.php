@@ -14,6 +14,21 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class ApiLoginController extends AbstractController
 {
+    #[Route('/api/login', name: 'api_login', methods: ['POST'])]
+    public function index(#[CurrentUser] ?User $user): JsonResponse
+    {
+        if (null === $user) {
+            return $this->json([
+                'message' => 'missing credentials',
+            ], JsonResponse::HTTP_UNAUTHORIZED);
+        }
+
+        return $this->json([
+            'user'  => $user->getUserIdentifier(),
+            'roles' => $user->getRoles(),
+        ]);
+    }
+
     #[Route('/api/registrar', name: 'api_registrar', methods: ['POST'])]
     public function register(Request $request, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $em): JsonResponse {
         $data = json_decode($request->getContent(), true);
@@ -40,20 +55,5 @@ class ApiLoginController extends AbstractController
         $userService->save($user);
 
         return $this->json(['message' => 'Usuário criado com sucesso!'], JsonResponse::HTTP_CREATED);
-    }
-
-    #[Route('/api/login', name: 'api_login', methods: ['POST'])]
-    public function index(#[CurrentUser] ?User $user): JsonResponse
-    {
-        if (null === $user) {
-            return $this->json([
-                'message' => 'missing credentials',
-            ], JsonResponse::HTTP_UNAUTHORIZED);
-        }
-
-        return $this->json([
-            'user'  => $user->getUserIdentifier(),
-            'roles' => $user->getRoles(),
-        ]);
     }
 }
