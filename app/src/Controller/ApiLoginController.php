@@ -14,7 +14,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class ApiLoginController extends AbstractController
 {
-    #[Route('/registrar', name: 'registrar', methods: ['POST'])]
+    #[Route('/api/registrar', name: 'api_registrar', methods: ['POST'])]
     public function register(Request $request, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $em): JsonResponse {
         $data = json_decode($request->getContent(), true);
 
@@ -42,7 +42,7 @@ class ApiLoginController extends AbstractController
         return $this->json(['message' => 'Usuário criado com sucesso!'], JsonResponse::HTTP_CREATED);
     }
 
-    #[Route('/login', name: 'login', methods: ['POST'])]
+    #[Route('/api/login', name: 'api_login', methods: ['POST'])]
     public function index(#[CurrentUser] ?User $user): JsonResponse
     {
         if (null === $user) {
