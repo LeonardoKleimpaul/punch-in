@@ -33,33 +33,29 @@ class ApiLoginController extends AbstractController
 
     #[Route('/api/registrar', name: 'api_registrar', methods: ['POST'])]
     public function register(Request $request, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $em): JsonResponse {
-        if($this->isGranted('ROLE_ADMIN')) {
-            $data = json_decode($request->getContent(), true);
+        $data = json_decode($request->getContent(), true);
 
-            $apiLoginService = new ApiLoginService($em);
-            $userService = new UserService($em);
+        $apiLoginService = new ApiLoginService($em);
+        $userService = new UserService($em);
 
-            $errors = $apiLoginService->validateNewUser($data);
+        $errors = $apiLoginService->validateNewUser($data);
 
-            if (count($errors) > 0) {
-                return $this->json([
-                    'error' => $errors['error'],
-                ], JsonResponse::HTTP_BAD_REQUEST);
-            }
-
-            // Criar uma nova instância de User
-            $user = new User();
-            $user->setEmail($data['email']);
-            $user->setRoles([$data['role']]);
-
-            $hashedPassword = $passwordHasher->hashPassword($user, $data['password']);
-            $user->setPassword($hashedPassword);
-
-            $userService->save($user);
-
-            return $this->json(['message' => 'Usuário criado com sucesso!'], JsonResponse::HTTP_CREATED);
+        if (count($errors) > 0) {
+            return $this->json([
+                'error' => $errors['error'],
+            ], JsonResponse::HTTP_BAD_REQUEST);
         }
 
-        return $this->json(['message' => 'Sem permissão para realizar a ação.'], JsonResponse::HTTP_UNAUTHORIZED);
+        // Criar uma nova instância de User
+        $user = new User();
+        $user->setEmail($data['email']);
+        $user->setRoles(['ROLE_USER']);
+
+        $hashedPassword = $passwordHasher->hashPassword($user, $data['password']);
+        $user->setPassword($hashedPassword);
+
+        $userService->save($user);
+
+        return $this->json(['message' => 'Usuário criado com sucesso!'], JsonResponse::HTTP_CREATED);
     }
 }
