@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use Symfony\Component\Security\Http\Attribute\CurrentUser;
 use App\Service\ApiLoginService;
 use App\Service\UserService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -19,7 +20,7 @@ class ApiLoginController extends AbstractController
     {
         if (null === $user) {
             return $this->json([
-                'message' => 'missing credentials',
+                'message' => 'Não foi possível autenticar o usuário.',
             ], JsonResponse::HTTP_UNAUTHORIZED);
         }
 
