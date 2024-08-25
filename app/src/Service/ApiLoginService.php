@@ -28,9 +28,9 @@ class ApiLoginService extends AbstractService
             return ['error' => 'A senha precisa ter pelo menos 8 caracteres.'];
         }
 
-        $teste = new UserService($this->getEntityManager());
+        $userService = new UserService($this->getEntityManager());
 
-        if($teste->findOneBy(['email' => $data['email']])) {
+        if($userService->findOneBy(['email' => $data['email']])) {
             return ['error' => 'Já existe um usuário cadastrado com este email.'];
         }
 
