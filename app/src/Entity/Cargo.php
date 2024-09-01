@@ -6,7 +6,7 @@ use App\Repository\CargoRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CargoRepository::class)]
-class Cargo
+class Cargo extends AbstractEntity
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
