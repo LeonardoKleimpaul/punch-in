@@ -11,4 +11,15 @@ class UserService extends AbstractService
     {
         parent::__construct($entityManager, User::class);
     }
+
+    public function validateUserService(array $data): array
+    {
+        $errors = [];
+
+        if (empty($data['userId']) || empty($data['cargoId'])) {
+            return ['error' => 'Selecione um usuário e um cargo válido.'];
+        }
+
+        return $errors;
+    }
 }

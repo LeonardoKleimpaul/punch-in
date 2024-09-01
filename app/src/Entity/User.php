@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -31,6 +33,17 @@ class User extends AbstractEntity implements UserInterface, PasswordAuthenticate
      */
     #[ORM\Column]
     private ?string $password = null;
+
+    /**
+     * @var Collection<int, UsersCargo>
+     */
+    #[ORM\OneToMany(targetEntity: UsersCargo::class, mappedBy: 'usuario')]
+    private Collection $usersCargos;
+
+    public function __construct()
+    {
+        $this->usersCargos = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -105,5 +118,35 @@ class User extends AbstractEntity implements UserInterface, PasswordAuthenticate
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection<int, UsersCargo>
+     */
+    public function getUsersCargos(): Collection
+    {
+        return $this->usersCargos;
+    }
+
+    public function addUsersCargo(UsersCargo $usersCargo): static
+    {
+        if (!$this->usersCargos->contains($usersCargo)) {
+            $this->usersCargos->add($usersCargo);
+            $usersCargo->setUsuario($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUsersCargo(UsersCargo $usersCargo): static
+    {
+        if ($this->usersCargos->removeElement($usersCargo)) {
+            // set the owning side to null (unless already changed)
+            if ($usersCargo->getUsuario() === $this) {
+                $usersCargo->setUsuario(null);
+            }
+        }
+
+        return $this;
     }
 }
