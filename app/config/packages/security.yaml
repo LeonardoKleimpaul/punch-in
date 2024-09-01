@@ -50,6 +50,7 @@ security:
     access_control:
         - { path: ^/api/login, roles: PUBLIC_ACCESS }
         - { path: ^/api/registrar, roles: PUBLIC_ACCESS }
+        - { path: ^/api/registrarponto, roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/api/admin/empresa/criar, roles: [IS_AUTHENTICATED_FULLY, ROLE_ADMIN] }
         - { path: ^/api/admin/cargo/criar, roles: [IS_AUTHENTICATED_FULLY, ROLE_ADMIN] }
         - { path: ^/api/admin/userscargo/criar, roles: [IS_AUTHENTICATED_FULLY, ROLE_ADMIN] }
