@@ -17,7 +17,7 @@ class Cargo extends AbstractEntity
     private ?string $funcao = null;
 
     #[ORM\Column]
-    private ?\DateInterval $cargaHoraria = null;
+    private $cargaHoraria = null;
 
     public function getId(): ?int
     {
@@ -36,14 +36,14 @@ class Cargo extends AbstractEntity
         return $this;
     }
 
-    public function getCargaHoraria(): ?\DateInterval
+    public function getCargaHoraria()
     {
         return $this->cargaHoraria;
     }
 
     public function setCargaHoraria(\DateInterval $cargaHoraria): static
     {
-        $this->cargaHoraria = $cargaHoraria;
+        $this->cargaHoraria = sprintf('%02d:%02d', $cargaHoraria->h, $cargaHoraria->i);
 
         return $this;
     }
