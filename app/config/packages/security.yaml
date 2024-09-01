@@ -35,6 +35,7 @@ security:
                 path: /api/logout
                 target: /api/login
     role_hierarchy:
+        ROLE_USER:        ROLE_USER
         ROLE_ADMIN:       ROLE_USER
         ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
@@ -49,8 +50,8 @@ security:
     access_control:
         - { path: ^/api/login, roles: PUBLIC_ACCESS }
         - { path: ^/api/registrar, roles: PUBLIC_ACCESS }
+        - { path: ^/api/admin/empresa/criar, roles: [IS_AUTHENTICATED_FULLY, ROLE_ADMIN] }
         - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }
-        - { path: ^/api/admin, roles: [IS_AUTHENTICATED_FULLY, ROLE_ADMIN] }
 
 when@test:
     security:
