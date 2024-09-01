@@ -27,7 +27,6 @@ class EmpresaController extends AbstractController
             ], JsonResponse::HTTP_BAD_REQUEST);
         }
 
-        // Criar uma nova instância de User
         $empresa = new Empresa();
         $empresa->setNome($data['nome']);
         $empresa->setCnpj($data['cnpj']);
