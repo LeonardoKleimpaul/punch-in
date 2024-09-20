@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\UserRegisterType;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
 use App\Service\ApiLoginService;
 use App\Service\UserService;
@@ -18,29 +19,43 @@ class ApiLoginController extends AbstractController
 {
     #[Route('/api/registrar', name: 'api_registrar', methods: ['POST'])]
     public function register(Request $request, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $em): JsonResponse {
-        $data = json_decode($request->getContent(), true);
-
-        $apiLoginService = new ApiLoginService($em);
+        $user = new User();
         $userService = new UserService($em);
 
-        $errors = $apiLoginService->validateNewUser($data);
+        $userForm = $this->createForm(UserRegisterType::class, $user);
+        $userForm->submit(json_decode($request->getContent(), true));
 
-        if (count($errors) > 0) {
+        if ($userForm->isValid()) {
+            $user = $userForm->getData();
+
+            $user->setRoles(['ROLE_USER']);
+
+            $hashedPassword = $passwordHasher->hashPassword($user, $user->getPassword());
+            $user->setPassword($hashedPassword);
+
+            $userService->save($user);
+
             return $this->json([
-                'error' => $errors['error'],
-            ], JsonResponse::HTTP_BAD_REQUEST);
+                'status' => 'success',
+                'message' => 'Usuário criado com sucesso!'
+            ], JsonResponse::HTTP_CREATED);
         }
 
-        // Criar uma nova instância de User
-        $user = new User();
-        $user->setEmail($data['email']);
-        $user->setRoles(['ROLE_USER']);
+        $errosForm = $userForm->getErrors(true);
+        $erro = [];
 
-        $hashedPassword = $passwordHasher->hashPassword($user, $data['password']);
-        $user->setPassword($hashedPassword);
+        if (count($errosForm) > 0) {
+            foreach ($errosForm as $error) {
+                $campo = $error->getOrigin()->getName();
+                $erro[$campo][] = $error->getMessage();
+            }
+        } else {
+            $erro = ['mensagem' => 'Não foi possível gravar a informação'];
+        }
 
-        $userService->save($user);
-
-        return $this->json(['message' => 'Usuário criado com sucesso!'], JsonResponse::HTTP_CREATED);
+        return $this->json([
+            'status' => 'error',
+            'erros' => $erro
+        ], JsonResponse::HTTP_BAD_REQUEST);
     }
 }

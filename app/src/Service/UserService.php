@@ -2,8 +2,10 @@
 
 namespace App\Service;
 
+use App\Entity\AbstractEntity;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class UserService extends AbstractService
 {
@@ -21,5 +23,15 @@ class UserService extends AbstractService
         }
 
         return $errors;
+    }
+
+    public function save(AbstractEntity $entity, ?int $id = null): AbstractEntity
+    {
+
+        if($this->findOneBy(['email' => $entity->getEmail()])) {
+            throw new ConflictHttpException('Já existe um usuário cadastrado com este e-mail.');
+        }
+
+        return parent::save($entity, $id);
     }
 }
