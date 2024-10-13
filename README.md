@@ -1,6 +1,15 @@
 # Punch-in
 
-Este projeto é uma API para um sistema de registro de ponto, desenvolvida com Symfony, Docker, LexikJWTAuthenticationBundle, PostgreSQL e Nginx.
+Autores: Leonardo Kleimpaul, Luan F Tedesco
+
+**Introdução:**
+A transformação digital tem impulsionado a criação de soluções práticas e automatizadas. Diante disso, decidimos criar um sistema para facilitar o dia a dia dos trabalhadores que precisam registrar seu horário de trabalho diariamente. O projeto "Punch-in" é uma API desenvolvida com tecnologias modernas, como Symfony, Docker, PostgreSQL e Nginx, voltada para empresas que buscam otimizar o controle da jornada de seus colaboradores.
+
+**Metodologia:**
+O desenvolvimento do "Punch-in" seguiu uma abordagem prática, utilizando diversas tecnologias e ferramentas que permitiram a construção de uma API robusta e eficiente. Para o gerenciamento de usuários e controle de autenticação, foi utilizado o LexikJWTAuthenticationBundle, que garante segurança por meio de tokens JWT. Além disso, foi empregada uma metodologia de contêinerização com Docker, permitindo que os ambientes de desenvolvimento e produção fossem facilmente replicáveis. O PostgreSQL foi escolhido como banco de dados relacional, proporcionando uma base de dados estável e de alto desempenho. Por fim, o Nginx foi configurado como servidor web, garantindo alta disponibilidade e performance na entrega da API.
+
+**Resultados:**
+O projeto "Punch-in" se destaca pela integração eficiente entre suas funcionalidades e o uso de tecnologias modernas. As soluções adotadas permitem um gerenciamento eficaz tanto dos usuários quanto das jornadas de trabalho, oferecendo uma interface simples e direta para o controle de ponto. A utilização de JWT para autenticação trouxe segurança e escalabilidade à aplicação, enquanto o uso de contêineres com Docker facilitou a configuração e manutenção do ambiente de produção.
 
 ## Funcionalidades
 
@@ -45,7 +54,7 @@ Este projeto é uma API para um sistema de registro de ponto, desenvolvida com S
 
 4. Gere o par de chaves para o JWT:
     ```bash
-    docker compose exec php php bin/console lexik:jwt:generate-keypair --overwrite
+    docker exec php bin/console lexik:jwt:generate-keypair --overwrite
     ```
 
 5. Agora, a API estará rodando no endereço: `http://localhost:8080`.
