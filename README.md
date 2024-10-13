@@ -54,7 +54,7 @@ O projeto "Punch-in" se destaca pela integração eficiente entre suas funcional
 
 4. Gere o par de chaves para o JWT:
     ```bash
-    docker exec php bin/console lexik:jwt:generate-keypair --overwrite
+    docker exec php8.2-container php bin/console lexik:jwt:generate-keypair --overwrite
     ```
 
 5. Agora, a API estará rodando no endereço: `http://localhost:8080`.
