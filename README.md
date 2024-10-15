@@ -69,7 +69,36 @@ Certifique-se de que os arquivos de chave estão em um local seguro e fora do al
 
 ## Rotas Principais
 
-- **POST api/login**: Realiza a autenticação do usuário e retorna um token JWT.
+### 1. Login
+
+**URL:** `http://localhost:8080/api/login`
+**Método:** `POST`
+**Descrição:** Realiza o login de um usuário.
+
+**Body de Exemplo:**
+```json
+{
+    "username": "",
+    "password": ""
+}
+```
+
+### 2. Register
+
+**URL:** `http://localhost:8080/api/register`
+**Método:** `POST`
+**Descrição:** Realiza o cadastro de um usuário.
+
+**Body de Exemplo:**
+```json
+{
+	"email": "",
+	"password": {
+		"first": "",
+		"second": ""
+	}
+}
+```
 
 ## Contribuindo
 
