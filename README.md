@@ -69,36 +69,72 @@ Certifique-se de que os arquivos de chave estão em um local seguro e fora do al
 
 ## Rotas Principais
 
-### 1. Login
+- **Login**
+  - Método: POST
+  - URL: http://localhost:8080/api/login
+  - Corpo:
+    ```json
+    {
+      "username": "",
+      "password": ""
+    }
+    ```
+- **Registro**
+  - Método: POST
+  - URL: http://localhost:8080/api/registrar
+  - Corpo:
+    ```json
+    {
+      "email": "",
+      "password": {
+        "first": "",
+        "second": ""
+      }
+    }
+    ```
 
-**URL:** `http://localhost:8080/api/login`
-**Método:** `POST`
-**Descrição:** Realiza o login de um usuário.
+### Administração
 
-**Body de Exemplo:**
-```json
-{
-    "username": "",
-    "password": ""
-}
-```
+- **Criar Cargo**
 
-### 2. Register
+  - Método: POST
+  - URL: http://localhost:8080/api/admin/cargo/criar
+  - Corpo:
+    ```json
+    {
+      "funcao": "Gerente",
+      "cargaHoraria": "05:48"
+    }
+    ```
 
-**URL:** `http://localhost:8080/api/register`
-**Método:** `POST`
-**Descrição:** Realiza o cadastro de um usuário.
+- **Registrar Ponto**
 
-**Body de Exemplo:**
-```json
-{
-	"email": "",
-	"password": {
-		"first": "",
-		"second": ""
-	}
-}
-```
+  - Método: POST
+  - URL: http://localhost:8080/api/registrarponto
+
+- **Associar Usuário a Cargo**
+
+  - Método: POST
+  - URL: http://localhost:8080/api/admin/userscargo/criar
+  - Corpo:
+    ```json
+    {
+      "userId": "",
+      "cargoId": ""
+    }
+    ```
+
+- **Criar Empresa**
+
+  - Método: POST
+  - URL: http://localhost:8080/api/admin/empresa/criar
+  - Corpo:
+    ```json
+    {
+      "nome": "",
+      "cnpj": ""
+    }
+    ```
 
 ## Contribuindo
 
