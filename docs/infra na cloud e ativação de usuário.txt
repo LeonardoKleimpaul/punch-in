@@ -1,0 +1,5 @@
+Infraestrutura: Optamos por utilizar o Google Cloud, que proporciona escalabilidade, segurança robusta. Essa plataforma permitirá que nossa aplicação cresça conforme a demanda, garantindo a proteção dos dados dos usuários.
+
+Ativação de Usuário: Utilizaremos autenticação via e-mail, complementada por tokens JWT (JSON Web Tokens) para garantir uma experiência de login segura e eficiente. Essa abordagem não apenas reforça a segurança, mas também facilita a gestão das sessões de usuário, proporcionando maior flexibilidade e controle.
+
+Para testar a autenticação basta baixar o projeto e seguir os passos presentes no readme.md
