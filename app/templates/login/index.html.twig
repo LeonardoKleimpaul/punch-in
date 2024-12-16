@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        /* Estilos básicos */
+        body {
+            background-color: #141414;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .login-container {
+            background-color: #1e1e1e;
+            padding: 30px;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 400px;
+        }
+        h1 { text-align: center; }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+            background: #252525;
+            color: #fff;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #800080;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #a020a0;
+        }
+        .error { color: red; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>Entrar</h1>
+        <form id="loginForm">
+            <input type="email" id="email" name="email" placeholder="Digite seu Email" required>
+            <input type="password" id="password" name="password" placeholder="Digite a senha" required>
+            <button type="submit">Entrar</button>
+            <p class="error" id="errorMessage"></p>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function (e) {
+            e.preventDefault(); // Evita o envio padrão do formulário
+
+            const username = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const response = await fetch('http://localhost:8080/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Login falhou. Verifique suas credenciais.');
+                }
+
+                const data = await response.json();
+                console.log(data); // Manipule a resposta aqui (ex.: salvar token)
+
+                alert('Login realizado com sucesso!');
+                window.location.href = '/'; // Redirecionar após login, ajuste a rota conforme necessário
+            } catch (error) {
+                document.getElementById('errorMessage').innerText = error.message;
+            }
+        });
+    </script>
+</body>
+</html>
