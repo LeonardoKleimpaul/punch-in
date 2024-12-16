@@ -36,7 +36,7 @@ class ApiLoginController extends AbstractController
             $userService->save($user);
 
             return $this->json([
-                'status' => 'success',
+                'success' => true,
                 'message' => 'Usuário criado com sucesso!'
             ], JsonResponse::HTTP_CREATED);
         }

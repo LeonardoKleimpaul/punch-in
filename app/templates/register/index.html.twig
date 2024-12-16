@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Punch-in</title>
+    <title>Cadastrar - Punch-in</title>
     <link rel="stylesheet" href="{{ asset('css/global.css') }}">
 </head>
 <body class="background-black-align">
     <div class="login-container">
-        <h1>Entrar</h1>
+        <h1>Crie a sua conta</h1>
         <form id="loginForm">
             <input class="default-input" type="email" id="email" name="email" placeholder="Digite seu Email" required>
             <input class="default-input" type="password" id="password" name="password" placeholder="Digite a senha" required>
-            <button class="default-button" type="submit">Entrar</button>
+            <input class="default-input" type="password" id="password_confirmation" name="password_confirmation" placeholder="Digite novamente a senha" required>
+            <button class="default-button" type="submit">Criar conta</button>
 
-                <!-- Link para registro -->
             <div style="margin-top: 15px;">
                 <p style="font-size: 14px; color: #ccc;">
-                    Ainda não tem uma conta?
-                    <a href="{{ path('register_page') }}" style="color: purple; text-decoration: none; font-weight: bold;">Criar</a>
+                    Já possui uma conta?
+                    <a href="{{ path('login_page') }}" style="color: purple; text-decoration: none; font-weight: bold;">Entrar</a>
                 </p>
             </div>
             <p class="error" id="errorMessage"></p>
@@ -36,18 +36,26 @@
 
         const username = document.getElementById('email').value;
         const password = document.getElementById('password').value;
+        const passwordConfirmation = document.getElementById('password_confirmation').value;
+
+        const formData = {
+            email: username,
+            password: {
+                first: password,
+                second: passwordConfirmation
+            }
+        };
 
         try {
-            const data = await apiRequestPost('/login', 'POST', { username, password });
+            const data = await apiRequestPost('/registrar', 'POST', formData);
 
-            if(data.token) {
-                alert('Login efetuado com sucesso!');
+            if(data.success) {
+                alert('Registrado com sucesso!');
 
-                sessionStorage.setItem('token', data.token);
-                window.location.href = '/home';
+                window.location.href = '/login';
 
             } else {
-                document.getElementById('errorMessage').innerText = "Ocorreu um erro ao tentar efetuar o login.";
+                document.getElementById('errorMessage').innerText = "Ocorreu um erro ao tentar efetuar o registro.";
             }
 
         } catch (error) {
