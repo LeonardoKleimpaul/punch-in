@@ -33,7 +33,7 @@ class RegistroPontoController extends AbstractController
 
         $registroPontoService->save($ponto);
 
-        return $this->json(['message' => 'Ponto registrado com sucesso!'], JsonResponse::HTTP_CREATED);
+        return $this->json(['message' => 'Ponto registrado com sucesso!'], JsonResponse::HTTP_OK);
     }
 
     #[Route('/api/home', name: 'api_home', methods: ['GET'])]
