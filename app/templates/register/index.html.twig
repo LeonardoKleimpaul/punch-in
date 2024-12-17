@@ -1,29 +1,31 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastrar - Punch-in</title>
-    <link rel="stylesheet" href="{{ asset('css/global.css') }}">
-</head>
-<body class="background-black-align">
-    <div class="login-container">
-        <h1>Crie a sua conta</h1>
-        <form id="loginForm">
-            <input class="default-input" type="email" id="email" name="email" placeholder="Digite seu Email" required>
-            <input class="default-input" type="password" id="password" name="password" placeholder="Digite a senha" required>
-            <input class="default-input" type="password" id="password_confirmation" name="password_confirmation" placeholder="Digite novamente a senha" required>
-            <button class="default-button" type="submit">Criar conta</button>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Cadastrar - Punch-in</title>
+        <link rel="stylesheet" href="{{ asset('css/global.css') }}">
+    </head>
+    <body class="background-black-align">
+        <div class="login-container">
+            <h1>Crie a sua conta</h1>
+            <form id="loginForm">
+                <input class="default-input" type="email" id="email" name="email" placeholder="Digite seu Email" required>
+                <input class="default-input" type="password" id="password" name="password" placeholder="Digite a senha" required>
+                <input class="default-input" type="password" id="password_confirmation" name="password_confirmation" placeholder="Digite novamente a senha" required>
+                <button class="default-button" type="submit">Criar conta</button>
 
-            <div style="margin-top: 15px;">
-                <p style="font-size: 14px; color: #ccc;">
-                    Já possui uma conta?
-                    <a href="{{ path('login_page') }}" style="color: purple; text-decoration: none; font-weight: bold;">Entrar</a>
-                </p>
-            </div>
-            <p class="error" id="errorMessage"></p>
-        </form>
-    </div>
+                <div style="margin-top: 15px;">
+                    <p style="font-size: 14px; color: #ccc;">
+                        Já possui uma conta?
+                        <a href="{{ path('login_page') }}" style="color: purple; text-decoration: none; font-weight: bold;">Entrar</a>
+                    </p>
+                </div>
+                <p class="error" id="errorMessage"></p>
+            </form>
+        </div>
+    </body>
+</html>
 
 <script type="module">
     import apiRequestPost from '/js/apiClient.js';
@@ -63,5 +65,3 @@
         }
     });
 </script>
-</body>
-</html>

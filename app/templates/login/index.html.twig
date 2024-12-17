@@ -1,29 +1,31 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Punch-in</title>
-    <link rel="stylesheet" href="{{ asset('css/global.css') }}">
-</head>
-<body class="background-black-align">
-    <div class="login-container">
-        <h1>Entrar</h1>
-        <form id="loginForm">
-            <input class="default-input" type="email" id="email" name="email" placeholder="Digite seu Email" required>
-            <input class="default-input" type="password" id="password" name="password" placeholder="Digite a senha" required>
-            <button class="default-button" type="submit">Entrar</button>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login - Punch-in</title>
+        <link rel="stylesheet" href="{{ asset('css/global.css') }}">
+    </head>
+    <body class="background-black-align">
+        <div class="login-container">
+            <h1>Entrar</h1>
+            <form id="loginForm">
+                <input class="default-input" type="email" id="email" name="email" placeholder="Digite seu Email" required>
+                <input class="default-input" type="password" id="password" name="password" placeholder="Digite a senha" required>
+                <button class="default-button" type="submit">Entrar</button>
 
-                <!-- Link para registro -->
-            <div style="margin-top: 15px;">
-                <p style="font-size: 14px; color: #ccc;">
-                    Ainda não tem uma conta?
-                    <a href="{{ path('register_page') }}" style="color: purple; text-decoration: none; font-weight: bold;">Criar</a>
-                </p>
-            </div>
-            <p class="error" id="errorMessage"></p>
-        </form>
-    </div>
+                    <!-- Link para registro -->
+                <div style="margin-top: 15px;">
+                    <p style="font-size: 14px; color: #ccc;">
+                        Ainda não tem uma conta?
+                        <a href="{{ path('register_page') }}" style="color: purple; text-decoration: none; font-weight: bold;">Criar</a>
+                    </p>
+                </div>
+                <p class="error" id="errorMessage"></p>
+            </form>
+        </div>
+    </body>
+</html>
 
 <script type="module">
     import apiRequestPost from '/js/apiClient.js';
@@ -55,5 +57,3 @@
         }
     });
 </script>
-</body>
-</html>
