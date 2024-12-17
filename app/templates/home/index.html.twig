@@ -1,12 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
-    <title>Meu Front no Symfony</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Punch-in</title>
+    <link rel="stylesheet" href="{{ asset('css/global.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('img/favicon.ico') }}">
 </head>
 <body>
-    <h1>{{ message }}</h1>
+    {% include 'partials/navbar.html.twig' %}
+
+    <section class="background-black-align">
+        <div class="login-container">
+            <h3>Último ponto</h3>
+            <p>Registrado ás: 08:00</p>
+            <br>
+            <hr>
+            <br>
+            <button class="default-button" type="button">Registrar Ponto</button>
+        </div>
+    </section>
+
 </body>
 </html>
+
 
 <script type="module">
     import verificaToken from '/js/verificaToken.js';

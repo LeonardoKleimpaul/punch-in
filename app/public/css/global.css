@@ -1,7 +1,14 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
 .background-black-align {
     background-color: #141414;
     color: #fff;
-    font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,7 +24,7 @@
     max-width: 400px;
 }
 
-h1 { text-align: center; }
+.titulo-login { text-align: center; }
 
 .default-input {
     width: 100%;
@@ -44,3 +51,23 @@ h1 { text-align: center; }
 }
 
 .error { color: red; text-align: center; }
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 1rem;
+    color: #fff;
+}
+
+.navbar .title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.navbar .menu {
+    font-size: 2rem;
+    cursor: pointer;
+}
