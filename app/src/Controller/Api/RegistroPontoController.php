@@ -35,4 +35,23 @@ class RegistroPontoController extends AbstractController
 
         return $this->json(['message' => 'Ponto registrado com sucesso!'], JsonResponse::HTTP_CREATED);
     }
+
+    #[Route('/api/home', name: 'api_home', methods: ['GET'])]
+    public function retornaUser(Request $request, Security $security, EntityManagerInterface $em,): JsonResponse
+    {
+        $user = $security->getUser();
+        $registroPontoService = new RegistroPontoService($em);
+
+        return $this->json(['userEmail' => $user->getEmail()], JsonResponse::HTTP_OK);
+    }
+
+    #[Route('/api/buscapontos', name: 'api_buscapontos', methods: ['GET'])]
+    public function retornaretornaUltimosPontos(Request $request, Security $security, EntityManagerInterface $em,): JsonResponse
+    {
+        $user = $security->getUser();
+        $registroPontoService = new RegistroPontoService($em);
+        $pontos = $registroPontoService->retornaUltimosPontosByUser($user->getId());
+
+        return $this->json(['pontos' => $pontos], JsonResponse::HTTP_OK);
+    }
 }

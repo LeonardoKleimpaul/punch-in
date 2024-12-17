@@ -12,12 +12,20 @@
 
     <section class="background-black-align">
         <div class="login-container">
+            Usuário <p id="user_email"></p>
+            <br>
             <h3>Último ponto</h3>
             <p>Registrado ás: 08:00</p>
             <br>
             <hr>
             <br>
             <button class="default-button" type="button">Registrar Ponto</button>
+            <br>
+            <br>
+            <button class="default-button" onclick="buscaHistorico()" type="button">Visualizar histórico de pontos</button>
+        </div>
+
+        <div id="listagem" style="visibility: hidden;" class="login-container listagem-container">
         </div>
     </section>
 
@@ -27,6 +35,10 @@
 
 <script type="module">
     import verificaToken from '/js/verificaToken.js';
+    import getContentHome from '/js/home.js';
 
     verificaToken();
+    getContentHome();
 </script>
+
+<script src="/js/buscaHistorico.js"></script>

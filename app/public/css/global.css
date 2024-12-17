@@ -10,6 +10,7 @@
     background-color: #141414;
     color: #fff;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
@@ -22,6 +23,7 @@
     border-radius: 8px;
     width: 100%;
     max-width: 400px;
+    margin-bottom: 100px;
 }
 
 .titulo-login { text-align: center; }
@@ -70,4 +72,41 @@
 .navbar .menu {
     font-size: 2rem;
     cursor: pointer;
+}
+
+.listagem-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Espaçamento entre os balões */
+}
+
+.balao {
+    background-color: #141414;
+    padding: 10px;
+    border-radius: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 300px;
+    margin: 0 auto;
+    font-size: 14px;
+    text-align: center;
+    color: #fff;
+}
+
+.btn-limpar {
+    background-color: #ff2b2b; /* Cor de fundo */
+    color: white; /* Cor do texto */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.btn-limpar:hover {
+    background-color: #f30c0c; /* Cor de fundo ao passar o mouse */
+}
+
+.btn-limpar:active {
+    background-color: #ff8383; /* Cor de fundo ao clicar */
 }

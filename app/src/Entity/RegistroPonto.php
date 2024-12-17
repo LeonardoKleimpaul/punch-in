@@ -45,8 +45,9 @@ class RegistroPonto extends AbstractEntity
 
     public function setDate(): static
     {
-        $this->date = new \DateTime('now');
+    $timezone = new \DateTimeZone('America/Sao_Paulo');
+    $this->date = new \DateTime('now', $timezone);
 
-        return $this;
+    return $this;
     }
 }
