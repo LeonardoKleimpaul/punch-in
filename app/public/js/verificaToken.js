@@ -2,8 +2,6 @@ function verificaToken() {
     const token = sessionStorage.getItem('token');
     const rotaAtual = window.location.pathname;
 
-    console.log(token);
-
     if (!token && (rotaAtual == '/login' || rotaAtual == '/register')) {
         return;
     }
